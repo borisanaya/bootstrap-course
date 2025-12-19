@@ -128,7 +128,7 @@ Incluye README con casos de uso y personalización.
 
 ### Uso de las carpetas de las partes 3 y 4:
 
-Todas las carpetas  **readme** con el enunciado del ejercicio y un tutorial paso a paso para realizarlo. Sigue el tutorial. Se incluye también la solución para que puedas ver que es lo que pide el ejercicio.
+Todas los ejercicios tienen  **readme** con el enunciado del ejercicio y un tutorial paso a paso para realizarlo. Sigue el tutorial. Se incluye también la solución para que puedas ver que es lo que pide el ejercicio.
 
 ### 13-exercices-1: Ejercicios Prácticos (Nivel 1)
 Carpeta con cinco ejercicios incrementales para practicar los componentes básicos:
