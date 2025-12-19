@@ -169,5 +169,5 @@ Ejemplos completos extraídos de la documentación oficial de Bootstrap:
 Cada ejemplo incluye HTML, CSS personalizado y README explicativo.
 
 ---
-**Nota 1:** Contenidos adpatados para el módulo de DIW del CFGS DAW 
+**Nota 1:** Contenidos adpatados para el módulo de DIW del CFGS DAW.  
 **Nota 2:** Los ejemplos y ejercicios de este curso están inspirados y adaptados de la documentación oficial de Bootstrap 5: [https://getbootstrap.com/docs/5.0/](https://getbootstrap.com/docs/5.0/)
