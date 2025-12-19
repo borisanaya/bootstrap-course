@@ -1,7 +1,3 @@
-# Guía Básica de Bootstrap 5
-
-Esta carpeta contiene ejemplos prácticos para aprender los conceptos fundamentales de Bootstrap 5.
-
 ## Conceptos Básicos
 
 ### ¿Qué es un Container?
