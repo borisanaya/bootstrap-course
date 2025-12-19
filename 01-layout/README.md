@@ -1,7 +1,3 @@
-# Guía de Aprendizaje Bootstrap 5
-
-Este repositorio contiene materiales de aprendizaje para Bootstrap 5, organizados en tres carpetas principales que progresan desde conceptos básicos hasta ejercicios prácticos.
-
 ## Estructura del Repositorio
 
 ### 01-starter-template
