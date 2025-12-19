@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Hugo 0.84.0">
+  <title>Plantilla de Cuadrícula · Bootstrap v5.0</title>
+
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/grid/">
+
+  <!-- Bootstrap core CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+  <style>
+    .themed-grid-col {
+      padding-top: .75rem;
+      padding-bottom: .75rem;
+      background-color: rgba(86, 61, 124, .15);
+      border: 1px solid rgba(86, 61, 124, .2);
+    }
+
+    .themed-container {
+      padding: .75rem;
+      margin-bottom: 1.5rem;
+      background-color: rgba(0, 123, 255, .15);
+      border: 1px solid rgba(0, 123, 255, .2);
+    }
+
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+  </style>
+
+
+  <!-- Custom styles for this template -->
+  <link href="grid.css" rel="stylesheet">
+</head>
+
+<body class="py-4">
+
+  <main>
+    <div class="container">
+
+      <h1>Ejemplos de cuadrícula Bootstrap</h1>
+      <p class="lead">Diseños de cuadrícula básicos para familiarizarte con la construcción dentro del sistema de
+        cuadrícula de Bootstrap.</p>
+      <p>En estos ejemplos se agrega la clase <code>.themed-grid-col</code> a las columnas para añadir algo de estilo.
+        Esta no es
+        una clase que esté disponible en Bootstrap por defecto.</p>
+
+      <h2 class="mt-4">Cinco niveles de cuadrícula</h2>
+      <p>Hay cinco niveles en el sistema de cuadrícula de Bootstrap, uno para cada rango de dispositivos que soportamos.
+        Cada nivel comienza
+        en un tamaño de ventana mínimo y se aplica automáticamente a dispositivos más grandes a menos que se
+        sobrescriba.</p>
+
+      <div class="row mb-3">
+        <div class="col-4 themed-grid-col">.col-4</div>
+        <div class="col-4 themed-grid-col">.col-4</div>
+        <div class="col-4 themed-grid-col">.col-4</div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-sm-4 themed-grid-col">.col-sm-4</div>
+        <div class="col-sm-4 themed-grid-col">.col-sm-4</div>
+        <div class="col-sm-4 themed-grid-col">.col-sm-4</div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-4 themed-grid-col">.col-md-4</div>
+        <div class="col-md-4 themed-grid-col">.col-md-4</div>
+        <div class="col-md-4 themed-grid-col">.col-md-4</div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-lg-4 themed-grid-col">.col-lg-4</div>
+        <div class="col-lg-4 themed-grid-col">.col-lg-4</div>
+        <div class="col-lg-4 themed-grid-col">.col-lg-4</div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-xl-4 themed-grid-col">.col-xl-4</div>
+        <div class="col-xl-4 themed-grid-col">.col-xl-4</div>
+        <div class="col-xl-4 themed-grid-col">.col-xl-4</div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-xxl-4 themed-grid-col">.col-xxl-4</div>
+        <div class="col-xxl-4 themed-grid-col">.col-xxl-4</div>
+        <div class="col-xxl-4 themed-grid-col">.col-xxl-4</div>
+      </div>
+
+      <h2 class="mt-4">Tres columnas iguales</h2>
+      <p>Obtén tres columnas de igual ancho <strong>comenzando en escritorios y escalando a escritorios
+          grandes</strong>. En dispositivos móviles,
+        tabletas y menores, las columnas se apilarán automáticamente.</p>
+      <div class="row mb-3">
+        <div class="col-md-4 themed-grid-col">.col-md-4</div>
+        <div class="col-md-4 themed-grid-col">.col-md-4</div>
+        <div class="col-md-4 themed-grid-col">.col-md-4</div>
+      </div>
+
+      <h2 class="mt-4">Tres columnas iguales alternativas</h2>
+      <p>Al usar las clases <code>.row-cols-*</code>, puedes crear fácilmente una cuadrícula con columnas iguales.</p>
+      <div class="row row-cols-md-3 mb-3">
+        <div class="col themed-grid-col"><code>.col</code> hijo de <code>.row-cols-md-3</code></div>
+        <div class="col themed-grid-col"><code>.col</code> hijo de <code>.row-cols-md-3</code></div>
+        <div class="col themed-grid-col"><code>.col</code> hijo de <code>.row-cols-md-3</code></div>
+      </div>
+
+      <h2 class="mt-4">Tres columnas desiguales</h2>
+      <p>Obtén tres columnas <strong>comenzando en escritorios y escalando a escritorios grandes</strong> de varios
+        anchos.
+        Recuerda, las columnas de la cuadrícula deben sumar doce para un solo bloque horizontal. Más de eso, y las
+        columnas comienzan a
+        apilarse sin importar el tamaño de la ventana.</p>
+      <div class="row mb-3">
+        <div class="col-md-3 themed-grid-col">.col-md-3</div>
+        <div class="col-md-6 themed-grid-col">.col-md-6</div>
+        <div class="col-md-3 themed-grid-col">.col-md-3</div>
+      </div>
+
+      <h2 class="mt-4">Dos columnas</h2>
+      <p>Obtén dos columnas <strong>comenzando en escritorios y escalando a escritorios grandes</strong>.</p>
+      <div class="row mb-3">
+        <div class="col-md-8 themed-grid-col">.col-md-8</div>
+        <div class="col-md-4 themed-grid-col">.col-md-4</div>
+      </div>
+
+      <h2 class="mt-4">Ancho completo, columna única</h2>
+      <p class="text-warning">
+        No son necesarias clases de cuadrícula para elementos de ancho completo.
+      </p>
+
+      <hr class="my-4">
+
+      <h2 class="mt-4">Dos columnas con dos columnas anidadas</h2>
+      <p>Según la documentación, anidar es fácil: simplemente coloca una fila de columnas dentro de una columna
+        existente. Esto te da dos
+        columnas <strong>comenzando en escritorios y escalando a escritorios grandes</strong>, con otras dos (de igual
+        ancho)
+        dentro de la columna más grande.</p>
+      <p>En tamaños de dispositivos móviles, tabletas y menores, estas columnas y sus columnas anidadas se apilarán.</p>
+      <div class="row mb-3">
+        <div class="col-md-8 themed-grid-col">
+          <div class="pb-3">
+            .col-md-8
+          </div>
+          <div class="row">
+            <div class="col-md-6 themed-grid-col">.col-md-6</div>
+            <div class="col-md-6 themed-grid-col">.col-md-6</div>
+          </div>
+        </div>
+        <div class="col-md-4 themed-grid-col">.col-md-4</div>
+      </div>
+
+      <hr class="my-4">
+
+      <h2 class="mt-4">Mixto: móvil y escritorio</h2>
+      <p>El sistema de cuadrícula de Bootstrap v4 tiene cinco niveles de clases: xs (extra pequeño, este infijo de clase
+        no se usa), sm
+        (pequeño), md (mediano), lg (grande), y xl (extra grande). Puedes usar casi cualquier combinación de estas
+        clases para
+        crear diseños más dinámicos y flexibles.</p>
+      <p>Cada nivel de clases escala hacia arriba, lo que significa que si planeas establecer los mismos anchos para md,
+        lg y xl, solo necesitas
+        especificar md.</p>
+      <div class="row mb-3">
+        <div class="col-md-8 themed-grid-col">.col-md-8</div>
+        <div class="col-6 col-md-4 themed-grid-col">.col-6 .col-md-4</div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-6 col-md-4 themed-grid-col">.col-6 .col-md-4</div>
+        <div class="col-6 col-md-4 themed-grid-col">.col-6 .col-md-4</div>
+        <div class="col-6 col-md-4 themed-grid-col">.col-6 .col-md-4</div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-6 themed-grid-col">.col-6</div>
+        <div class="col-6 themed-grid-col">.col-6</div>
+      </div>
+
+      <hr class="my-4">
+
+      <h2 class="mt-4">Mixto: móvil, tableta y escritorio</h2>
+      <div class="row mb-3">
+        <div class="col-sm-6 col-lg-8 themed-grid-col">.col-sm-6 .col-lg-8</div>
+        <div class="col-6 col-lg-4 themed-grid-col">.col-6 .col-lg-4</div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-6 col-sm-4 themed-grid-col">.col-6 .col-sm-4</div>
+        <div class="col-6 col-sm-4 themed-grid-col">.col-6 .col-sm-4</div>
+        <div class="col-6 col-sm-4 themed-grid-col">.col-6 .col-sm-4</div>
+      </div>
+
+      <hr class="my-4">
+
+      <h2 class="mt-4">Espaciado (Gutters)</h2>
+      <p>Con las clases <code>.gx-*</code>, se pueden ajustar los espacios horizontales.</p>
+      <div class="row row-cols-1 row-cols-md-3 gx-4">
+        <div class="col themed-grid-col"><code>.col</code> con espaciado <code>.gx-4</code></div>
+        <div class="col themed-grid-col"><code>.col</code> con espaciado <code>.gx-4</code></div>
+        <div class="col themed-grid-col"><code>.col</code> con espaciado <code>.gx-4</code></div>
+        <div class="col themed-grid-col"><code>.col</code> con espaciado <code>.gx-4</code></div>
+        <div class="col themed-grid-col"><code>.col</code> con espaciado <code>.gx-4</code></div>
+        <div class="col themed-grid-col"><code>.col</code> con espaciado <code>.gx-4</code></div>
+      </div>
+      <p class="mt-4">Usa las clases <code>.gy-*</code> para controlar los espacios verticales.</p>
+      <div class="row row-cols-1 row-cols-md-3 gy-4">
+        <div class="col themed-grid-col"><code>.col</code> con espaciado <code>.gy-4</code></div>
+        <div class="col themed-grid-col"><code>.col</code> con espaciado <code>.gy-4</code></div>
+        <div class="col themed-grid-col"><code>.col</code> con espaciado <code>.gy-4</code></div>
+        <div class="col themed-grid-col"><code>.col</code> con espaciado <code>.gy-4</code></div>
+        <div class="col themed-grid-col"><code>.col</code> con espaciado <code>.gy-4</code></div>
+        <div class="col themed-grid-col"><code>.col</code> con espaciado <code>.gy-4</code></div>
+      </div>
+      <p class="mt-4">Con las clases <code>.g-*</code>, los espacios en ambas direcciones se pueden ajustar.</p>
+      <div class="row row-cols-1 row-cols-md-3 g-3">
+        <div class="col themed-grid-col"><code>.col</code> con espaciado <code>.g-3</code></div>
+        <div class="col themed-grid-col"><code>.col</code> con espaciado <code>.g-3</code></div>
+        <div class="col themed-grid-col"><code>.col</code> con espaciado <code>.g-3</code></div>
+        <div class="col themed-grid-col"><code>.col</code> con espaciado <code>.g-3</code></div>
+        <div class="col themed-grid-col"><code>.col</code> con espaciado <code>.g-3</code></div>
+        <div class="col themed-grid-col"><code>.col</code> con espaciado <code>.g-3</code></div>
+      </div>
+    </div>
+
+
+  </main>
+
+
+
+</body>
+
+</html>

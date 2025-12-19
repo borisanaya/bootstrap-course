@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejemplo 3: Sidebar + Contenido</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    /* Estilos para visualizar las columnas */
+    .col-3 {
+      background-color: lightcoral;
+      border: 2px solid white;
+      padding: 20px;
+    }
+    .col-9 {
+      background-color: lightyellow;
+      border: 2px solid white;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+  
+  <div class="container">
+    <h1>Sidebar + Contenido Principal</h1>
+    <p>Sidebar usa <strong>.col-3</strong> (25%) y Contenido usa <strong>.col-9</strong> (75%)</p>
+    <p>3 + 9 = 12 columnas</p>
+    
+    <div class="row">
+      <div class="col-3">
+        <h3>Sidebar</h3>
+        <p>Menú o navegación</p>
+      </div>
+      <div class="col-9">
+        <h2>Contenido Principal</h2>
+        <p>Aquí va el contenido principal de la página.</p>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

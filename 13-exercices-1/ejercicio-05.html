@@ -1,0 +1,639 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ejercicio 05 - Landing Page Completa</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+  <style>
+    /* Smooth scroll */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Espaciado para navbar fijo */
+    body {
+      padding-top: 76px;
+    }
+
+    /* Hero section */
+    .hero-section {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      display: flex;
+      align-items: center;
+    }
+
+    /* Secciones */
+    section {
+      padding: 80px 0;
+    }
+
+    /* Cards con hover effect */
+    .feature-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Project cards */
+    .project-card {
+      overflow: hidden;
+      position: relative;
+    }
+
+    .project-card img {
+      transition: transform 0.5s ease;
+    }
+
+    .project-card:hover img {
+      transform: scale(1.1);
+    }
+
+    .project-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(102, 126, 234, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .project-card:hover .project-overlay {
+      opacity: 1;
+    }
+
+    /* Testimonials */
+    .testimonial-item {
+      padding: 40px;
+    }
+
+    /* Limitar tamaño de imágenes en el carrusel de testimonios */
+    .carousel-inner .testimonial-item img {
+      width: 300px;
+      height: 300px;
+      object-fit: cover;
+      object-position: center;
+      margin: 0 auto 1rem auto;
+      display: block;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #212529;
+      color: white;
+    }
+
+    footer a {
+      color: #adb5bd;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    footer a:hover {
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#hero">
+        🚀 TechSolutions
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title">TechSolutions</h5>
+          <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
+        </div>
+
+        <div class="offcanvas-body">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="#hero">Inicio</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#features">Características</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#projects">Proyectos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#testimonials">Testimonios</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#contact">Contacto</a>
+            </li>
+          </ul>
+          <a href="#contact" class="btn btn-primary ms-lg-3">Comenzar</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="hero" class="hero-section">
+    <div class="container">
+      <div class="row align-items-center">
+        <!-- Contenido -->
+        <div class="col-lg-6 mb-4 mb-lg-0">
+          <h1 class="display-2 fw-bold mb-4">
+            Transformamos Ideas en Realidad Digital
+          </h1>
+          <p class="lead mb-4">
+            Desarrollamos soluciones tecnológicas innovadoras que impulsan tu negocio al siguiente nivel.
+          </p>
+          <a href="#contact" class="btn btn-light btn-lg me-3">
+            Empezar Ahora
+          </a>
+          <a href="#projects" class="btn btn-outline-light btn-lg">
+            Ver Proyectos
+          </a>
+        </div>
+
+        <!-- Imagen -->
+        <div class="col-lg-6 text-center">
+          <img src="pixies.jpg" class="img-fluid rounded" alt="Hero">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección de Características -->
+  <section id="features" class="bg-light">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="display-5 fw-bold">Nuestras Características</h2>
+        <p class="lead text-muted">
+          Todo lo que necesitas para llevar tu proyecto al éxito
+        </p>
+      </div>
+
+      <div class="row g-4">
+        <!-- Feature 1 -->
+        <div class="col-lg-4 col-md-6">
+          <div class="card feature-card h-100 border-0 shadow text-center p-4">
+            <div class="fs-1 text-primary mb-3">⚡</div>
+            <h5 class="card-title mb-3">Rápido y Eficiente</h5>
+            <p class="card-text text-muted">
+              Desarrollo ágil con las últimas tecnologías para resultados rápidos.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="col-lg-4 col-md-6">
+          <div class="card feature-card h-100 border-0 shadow text-center p-4">
+            <div class="fs-1 text-primary mb-3">📱</div>
+            <h5 class="card-title mb-3">100% Responsive</h5>
+            <p class="card-text text-muted">
+              Diseños que se adaptan perfectamente a cualquier dispositivo.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="col-lg-4 col-md-6">
+          <div class="card feature-card h-100 border-0 shadow text-center p-4">
+            <div class="fs-1 text-primary mb-3">🔒</div>
+            <h5 class="card-title mb-3">Seguro</h5>
+            <p class="card-text text-muted">
+              Máxima seguridad y protección de datos en todos nuestros proyectos.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="col-lg-4 col-md-6">
+          <div class="card feature-card h-100 border-0 shadow text-center p-4">
+            <div class="fs-1 text-primary mb-3">🎨</div>
+            <h5 class="card-title mb-3">Diseño Moderno</h5>
+            <p class="card-text text-muted">
+              Interfaces intuitivas y atractivas que encantan a los usuarios.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 5 -->
+        <div class="col-lg-4 col-md-6">
+          <div class="card feature-card h-100 border-0 shadow text-center p-4">
+            <div class="fs-1 text-primary mb-3">💼</div>
+            <h5 class="card-title mb-3">Soporte 24/7</h5>
+            <p class="card-text text-muted">
+              Equipo disponible en todo momento para ayudarte.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 6 -->
+        <div class="col-lg-4 col-md-6">
+          <div class="card feature-card h-100 border-0 shadow text-center p-4">
+            <div class="fs-1 text-primary mb-3">🚀</div>
+            <h5 class="card-title mb-3">Escalable</h5>
+            <p class="card-text text-muted">
+              Soluciones que crecen con tu negocio sin límites.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Galería de Proyectos -->
+  <section id="projects">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="display-5 fw-bold">Proyectos Destacados</h2>
+        <p class="lead text-muted">
+          Algunos de nuestros trabajos más recientes
+        </p>
+      </div>
+
+      <div class="row g-4">
+        <!-- Proyecto 1 -->
+        <div class="col-lg-4 col-md-6">
+          <div class="card project-card border-0 shadow-sm h-100">
+            <div class="position-relative">
+              <img src="pixies.jpg" class="card-img-top" alt="Proyecto 1">
+              <div class="project-overlay">
+                <div class="text-white text-center">
+                  <h5>E-commerce Platform</h5>
+                  <p>Desarrollo Web</p>
+                  <button class="btn btn-light">Ver Detalles</button>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">E-commerce Platform</h5>
+              <p class="card-text text-muted">
+                Plataforma completa de comercio electrónico con pasarela de pagos.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Proyecto 2 -->
+        <div class="col-lg-4 col-md-6">
+          <div class="card project-card border-0 shadow-sm h-100">
+            <div class="position-relative">
+              <img src="ktt1.jpg" class="card-img-top" alt="Proyecto 2">
+              <div class="project-overlay">
+                <div class="text-white text-center">
+                  <h5>App Móvil</h5>
+                  <p>Desarrollo Mobile</p>
+                  <button class="btn btn-light">Ver Detalles</button>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">App Móvil Financiera</h5>
+              <p class="card-text text-muted">
+                Aplicación móvil para gestión de finanzas personales.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Proyecto 3 -->
+        <div class="col-lg-4 col-md-6">
+          <div class="card project-card border-0 shadow-sm h-100">
+            <div class="position-relative">
+              <img src="pixies.jpg" class="card-img-top" alt="Proyecto 3">
+              <div class="project-overlay">
+                <div class="text-white text-center">
+                  <h5>Dashboard Analytics</h5>
+                  <p>Business Intelligence</p>
+                  <button class="btn btn-light">Ver Detalles</button>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Dashboard Analytics</h5>
+              <p class="card-text text-muted">
+                Panel de control con visualización de datos en tiempo real.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Proyecto 4 -->
+        <div class="col-lg-4 col-md-6">
+          <div class="card project-card border-0 shadow-sm h-100">
+            <div class="position-relative">
+              <img src="ktt1.jpg" class="card-img-top" alt="Proyecto 4">
+              <div class="project-overlay">
+                <div class="text-white text-center">
+                  <h5>CRM System</h5>
+                  <p>Software Empresarial</p>
+                  <button class="btn btn-light">Ver Detalles</button>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">CRM System</h5>
+              <p class="card-text text-muted">
+                Sistema de gestión de relaciones con clientes.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Proyecto 5 -->
+        <div class="col-lg-4 col-md-6">
+          <div class="card project-card border-0 shadow-sm h-100">
+            <div class="position-relative">
+              <img src="pixies.jpg" class="card-img-top" alt="Proyecto 5">
+              <div class="project-overlay">
+                <div class="text-white text-center">
+                  <h5>Landing Page</h5>
+                  <p>Marketing Digital</p>
+                  <button class="btn btn-light">Ver Detalles</button>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Landing Page Corporativa</h5>
+              <p class="card-text text-muted">
+                Sitio web corporativo con alta conversión.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Proyecto 6 -->
+        <div class="col-lg-4 col-md-6">
+          <div class="card project-card border-0 shadow-sm h-100">
+            <div class="position-relative">
+              <img src="ktt1.jpg" class="card-img-top" alt="Proyecto 6">
+              <div class="project-overlay">
+                <div class="text-white text-center">
+                  <h5>Plataforma Educativa</h5>
+                  <p>E-Learning</p>
+                  <button class="btn btn-light">Ver Detalles</button>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Plataforma Educativa</h5>
+              <p class="card-text text-muted">
+                Sistema de aprendizaje online con cursos interactivos.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección de Testimonios -->
+  <section id="testimonials" class="bg-light">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="display-5 fw-bold">Lo Que Dicen Nuestros Clientes</h2>
+        <p class="lead text-muted">
+          Testimonios reales de empresas satisfechas
+        </p>
+      </div>
+
+      <!-- Carousel -->
+      <div id="testimonialsCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#testimonialsCarousel" data-bs-slide-to="0" class="active"></button>
+          <button type="button" data-bs-target="#testimonialsCarousel" data-bs-slide-to="1"></button>
+          <button type="button" data-bs-target="#testimonialsCarousel" data-bs-slide-to="2"></button>
+        </div>
+
+        <div class="carousel-inner">
+          <!-- Testimonio 1 -->
+          <div class="carousel-item active">
+            <div class="testimonial-item text-center">
+              <img src="pixies.jpg" class="rounded-circle mb-3" alt="Cliente 1">
+              <p class="lead mb-4">
+                "TechSolutions transformó completamente nuestro negocio. Su equipo es profesional y los resultados
+                superaron nuestras expectativas."
+              </p>
+              <h5>María González</h5>
+              <p class="text-muted">CEO - TechStart Inc.</p>
+            </div>
+          </div>
+
+          <!-- Testimonio 2 -->
+          <div class="carousel-item">
+            <div class="testimonial-item text-center">
+              <img src="ktt1.jpg" class="rounded-circle mb-3" alt="Cliente 2">
+              <p class="lead mb-4">
+                "Excelente trabajo en tiempo récord. La plataforma que desarrollaron es intuitiva y nuestros usuarios la
+                adoran."
+              </p>
+              <h5>Juan López</h5>
+              <p class="text-muted">Director de Tecnología - InnovaCorp</p>
+            </div>
+          </div>
+
+          <!-- Testimonio 3 -->
+          <div class="carousel-item">
+            <div class="testimonial-item text-center">
+              <img src="pixies.jpg" class="rounded-circle mb-3" alt="Cliente 3">
+              <p class="lead mb-4">
+                "El mejor socio tecnológico que hemos tenido. Siempre disponibles y con soluciones creativas a nuestros
+                desafíos."
+              </p>
+              <h5>Ana Sánchez</h5>
+              <p class="text-muted">Fundadora - DigitalVentures</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Controles -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon bg-dark rounded-circle p-3"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon bg-dark rounded-circle p-3"></span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Formulario de Contacto -->
+  <section id="contact">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold">Hablemos de Tu Proyecto</h2>
+            <p class="lead text-muted">
+              Completa el formulario y te contactaremos en 24 horas
+            </p>
+          </div>
+
+          <div class="card shadow border-0">
+            <div class="card-body p-5">
+              <form id="contactForm" class="needs-validation" novalidate>
+                <div class="row g-3">
+                  <!-- Nombre -->
+                  <div class="col-md-6">
+                    <label for="nombre" class="form-label">Nombre Completo *</label>
+                    <input type="text" class="form-control" id="nombre" required minlength="3">
+                    <div class="invalid-feedback">Por favor ingresa tu nombre.</div>
+                  </div>
+
+                  <!-- Email -->
+                  <div class="col-md-6">
+                    <label for="email" class="form-label">Email *</label>
+                    <input type="email" class="form-control" id="email" required>
+                    <div class="invalid-feedback">Por favor ingresa un email válido.</div>
+                  </div>
+
+                  <!-- Empresa -->
+                  <div class="col-12">
+                    <label for="empresa" class="form-label">Empresa</label>
+                    <input type="text" class="form-control" id="empresa">
+                  </div>
+
+                  <!-- Mensaje -->
+                  <div class="col-12">
+                    <label for="mensaje" class="form-label">Mensaje *</label>
+                    <textarea class="form-control" id="mensaje" rows="5" required minlength="10"></textarea>
+                    <div class="invalid-feedback">El mensaje debe tener al menos 10 caracteres.</div>
+                  </div>
+
+                  <!-- Botón -->
+                  <div class="col-12">
+                    <button type="submit" class="btn btn-primary btn-lg w-100">
+                      Enviar Mensaje
+                    </button>
+                  </div>
+                </div>
+              </form>
+
+              <!-- Mensaje de éxito -->
+              <div id="successAlert" class="alert alert-success mt-3" style="display: none;">
+                <strong>¡Gracias!</strong> Tu mensaje ha sido enviado correctamente.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-5">
+    <div class="container">
+      <div class="row g-4">
+        <!-- Columna 1: Acerca de -->
+        <div class="col-lg-4">
+          <h5 class="mb-3">🚀 TechSolutions</h5>
+          <p class="text-muted">
+            Transformamos ideas en realidad digital con soluciones tecnológicas innovadoras.
+          </p>
+          <p class="text-muted">
+            © 2024 TechSolutions. Todos los derechos reservados.
+          </p>
+        </div>
+
+        <!-- Columna 2: Enlaces rápidos -->
+        <div class="col-lg-4">
+          <h5 class="mb-3">Enlaces Rápidos</h5>
+          <ul class="list-unstyled">
+            <li class="mb-2"><a href="#hero">Inicio</a></li>
+            <li class="mb-2"><a href="#features">Características</a></li>
+            <li class="mb-2"><a href="#projects">Proyectos</a></li>
+            <li class="mb-2"><a href="#testimonials">Testimonios</a></li>
+            <li class="mb-2"><a href="#contact">Contacto</a></li>
+          </ul>
+        </div>
+
+        <!-- Columna 3: Redes sociales -->
+        <div class="col-lg-4">
+          <h5 class="mb-3">Síguenos</h5>
+          <div class="d-flex gap-3">
+            <a href="#" class="btn btn-outline-light">
+              Facebook
+            </a>
+            <a href="#" class="btn btn-outline-light">
+              Twitter
+            </a>
+            <a href="#" class="btn btn-outline-light">
+              LinkedIn
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+
+  <!-- JavaScript personalizado -->
+  <script>
+    // Validación del formulario
+    const form = document.getElementById('contactForm');
+    const successAlert = document.getElementById('successAlert');
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+
+      if (form.checkValidity()) {
+        const btn = form.querySelector('button[type="submit"]');
+        btn.disabled = true;
+        btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Enviando...';
+
+        setTimeout(() => {
+          successAlert.style.display = 'block';
+          form.reset();
+          form.classList.remove('was-validated');
+          btn.disabled = false;
+          btn.innerHTML = 'Enviar Mensaje';
+
+          setTimeout(() => {
+            successAlert.style.display = 'none';
+          }, 5000);
+        }, 1500);
+      } else {
+        form.classList.add('was-validated');
+      }
+    });
+
+    // Cerrar offcanvas al hacer clic en enlace
+    document.querySelectorAll('.offcanvas-body .nav-link').forEach(link => {
+      link.addEventListener('click', function () {
+        const offcanvasElement = document.getElementById('offcanvasNavbar');
+        const offcanvas = bootstrap.Offcanvas.getInstance(offcanvasElement);
+        if (offcanvas) {
+          offcanvas.hide();
+        }
+      });
+    });
+  </script>
+
+</body>
+
+</html>

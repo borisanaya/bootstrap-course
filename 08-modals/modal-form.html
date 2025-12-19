@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Modal con Formulario Validado</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="p-4">
+	<!-- Botón para abrir el modal -->
+	<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registroModal">
+		Abrir Formulario
+	</button>
+
+	<!-- Modal -->
+	<div class="modal fade" id="registroModal" tabindex="-1" aria-labelledby="registroModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<!-- Encabezado del modal -->
+				<div class="modal-header">
+					<h5 class="modal-title" id="registroModalLabel">Registro</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+				</div>
+				<!-- Cuerpo del modal con formulario -->
+				<div class="modal-body">
+					<form class="needs-validation" novalidate>
+						<div class="mb-3">
+							<label for="nombre" class="form-label">Nombre</label>
+							<input type="text" class="form-control" id="nombre" required minlength="3">
+							<div class="invalid-feedback">El nombre debe tener al menos 3 caracteres.</div>
+						</div>
+						<div class="mb-3">
+							<label for="email" class="form-label">Correo electrónico</label>
+							<input type="email" class="form-control" id="email" required>
+							<div class="invalid-feedback">Introduce un correo válido.</div>
+						</div>
+						<div class="mb-3">
+							<label for="password" class="form-label">Contraseña</label>
+							<input type="password" class="form-control" id="password" required minlength="6">
+							<div class="invalid-feedback">La contraseña debe tener al menos 6 caracteres.</div>
+						</div>
+						<button type="submit" class="btn btn-primary">Registrarse</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Scripts Bootstrap y validación -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+	<script>
+		// Validación Bootstrap
+		(function () {
+			'use strict';
+			const forms = document.querySelectorAll('.needs-validation');
+			Array.from(forms).forEach(form => {
+				form.addEventListener('submit', event => {
+					if (!form.checkValidity()) {
+						event.preventDefault();
+						event.stopPropagation();
+					}
+					form.classList.add('was-validated');
+				}, false);
+			});
+		})();
+	</script>
+</body>
+</html>

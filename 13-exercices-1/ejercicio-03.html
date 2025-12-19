@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ejercicio 03 - Formulario de Contacto</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+  <style>
+    body {
+      padding: 40px 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+    }
+  </style>
+</head>
+
+<body class="bg-light">
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-6 col-md-8">
+        <div class="card shadow">
+          <div class="card-body p-4">
+            <!-- Título -->
+            <h2 class="card-title text-center mb-4">Formulario de Contacto</h2>
+            <p class="text-center text-muted mb-4">
+              Completa todos los campos para enviarnos tu mensaje
+            </p>
+
+            <!-- Formulario -->
+            <form id="contactForm" class="needs-validation" novalidate>
+
+              <!-- Campo: Nombre -->
+              <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre Completo *</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" required minlength="3"
+                  placeholder="Ej: Juan Pérez">
+                <div class="invalid-feedback">
+                  Por favor ingresa tu nombre (mínimo 3 caracteres).
+                </div>
+                <div class="valid-feedback">
+                  ¡Perfecto!
+                </div>
+              </div>
+
+              <!-- Campo: Email -->
+              <div class="mb-3">
+                <label for="email" class="form-label">Correo Electrónico *</label>
+                <input type="email" class="form-control" id="email" name="email" required
+                  placeholder="ejemplo@correo.com">
+                <div class="invalid-feedback">
+                  Por favor ingresa un correo electrónico válido.
+                </div>
+                <div class="valid-feedback">
+                  ¡Correo válido!
+                </div>
+              </div>
+
+              <!-- Campo: Teléfono (opcional) -->
+              <div class="mb-3">
+                <label for="telefono" class="form-label">Teléfono (opcional)</label>
+                <input type="tel" class="form-control" id="telefono" name="telefono" pattern="[0-9]{9,15}"
+                  placeholder="612345678">
+                <div class="invalid-feedback">
+                  El teléfono debe contener entre 9 y 15 dígitos.
+                </div>
+                <div class="valid-feedback">
+                  ¡Teléfono válido!
+                </div>
+              </div>
+
+              <!-- Campo: Asunto -->
+              <div class="mb-3">
+                <label for="asunto" class="form-label">Asunto *</label>
+                <select class="form-select" id="asunto" name="asunto" required>
+                  <option value="" selected disabled>Selecciona un asunto</option>
+                  <option value="consulta">Consulta General</option>
+                  <option value="soporte">Soporte Técnico</option>
+                  <option value="ventas">Información de Ventas</option>
+                </select>
+                <div class="invalid-feedback">
+                  Por favor selecciona un asunto.
+                </div>
+              </div>
+
+              <!-- Campo: Mensaje -->
+              <div class="mb-3">
+                <label for="mensaje" class="form-label">Mensaje *</label>
+                <textarea class="form-control" id="mensaje" name="mensaje" rows="5" required minlength="10"
+                  placeholder="Escribe tu mensaje aquí..."></textarea>
+                <div class="invalid-feedback">
+                  El mensaje debe tener al menos 10 caracteres.
+                </div>
+                <div class="valid-feedback">
+                  ¡Mensaje recibido!
+                </div>
+              </div>
+
+              <!-- Checkbox: Términos -->
+              <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="terminos" required>
+                <label class="form-check-label" for="terminos">
+                  Acepto los <a href="#" target="_blank">términos y condiciones</a> *
+                </label>
+                <div class="invalid-feedback">
+                  Debes aceptar los términos y condiciones.
+                </div>
+              </div>
+
+              <!-- Botón de Envío -->
+              <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary btn-lg">
+                  📧 Enviar Mensaje
+                </button>
+              </div>
+
+            </form>
+
+            <!-- Mensaje de Éxito -->
+            <div id="successMessage" class="alert alert-success mt-3" style="display: none;">
+              <strong>¡Éxito!</strong> Tu mensaje ha sido enviado correctamente.
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+
+  <!-- JavaScript de Validación -->
+  <script>
+    // Obtener elementos
+    const form = document.getElementById('contactForm');
+    const successMessage = document.getElementById('successMessage');
+
+    // Evento submit
+    form.addEventListener('submit', function (event) {
+      // Prevenir envío por defecto
+      event.preventDefault();
+      event.stopPropagation();
+
+      // Verificar validez
+      if (form.checkValidity()) {
+        // Formulario válido
+        
+        // Deshabilitar botón
+        const submitBtn = form.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Enviando...';
+
+        // Simular envío (2 segundos)
+        setTimeout(() => {
+          // Mostrar mensaje de éxito
+          successMessage.style.display = 'block';
+
+          // Resetear formulario
+          form.reset();
+
+          // Quitar clase de validación
+          form.classList.remove('was-validated');
+
+          // Re-habilitar botón
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = '📧 Enviar Mensaje';
+
+          // Ocultar mensaje después de 5 segundos
+          setTimeout(() => {
+            successMessage.style.display = 'none';
+          }, 5000);
+        }, 2000);
+
+      } else {
+        // Formulario inválido: mostrar errores
+        form.classList.add('was-validated');
+      }
+    });
+
+    // Validación en tiempo real (opcional)
+    const inputs = form.querySelectorAll('input, select, textarea');
+
+    inputs.forEach(input => {
+      input.addEventListener('blur', function () {
+        // Validar cuando pierde el foco
+        if (this.checkValidity()) {
+          this.classList.remove('is-invalid');
+          this.classList.add('is-valid');
+        } else {
+          if (this.value !== '' || this.hasAttribute('required')) {
+            this.classList.remove('is-valid');
+            this.classList.add('is-invalid');
+          }
+        }
+      });
+    });
+  </script>
+
+</body>
+
+</html>

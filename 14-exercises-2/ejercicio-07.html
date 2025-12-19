@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ejercicio 07 - Modals y Toasts</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+</head>
+<body class="bg-light">
+
+  <!-- Toast Container -->
+  <div class="toast-container position-fixed top-0 end-0 p-3" id="toastContainer"></div>
+
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card shadow">
+          <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <h4 class="mb-0"><i class="bi bi-list-check me-2"></i>Gestor de Tareas</h4>
+            <button class="btn btn-light btn-sm" data-bs-toggle="modal" data-bs-target="#addTaskModal">
+              <i class="bi bi-plus-lg"></i> Nueva Tarea
+            </button>
+          </div>
+          <ul class="list-group list-group-flush" id="taskList">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              <span>Completar ejercicio de Bootstrap</span>
+              <div>
+                <button class="btn btn-success btn-sm me-2 complete-btn">
+                  <i class="bi bi-check"></i> Completar
+                </button>
+                <button class="btn btn-danger btn-sm delete-btn">
+                  <i class="bi bi-trash"></i> Eliminar
+                </button>
+              </div>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              <span>Estudiar JavaScript</span>
+              <div>
+                <button class="btn btn-success btn-sm me-2 complete-btn">
+                  <i class="bi bi-check"></i> Completar
+                </button>
+                <button class="btn btn-danger btn-sm delete-btn">
+                  <i class="bi bi-trash"></i> Eliminar
+                </button>
+              </div>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              <span>Revisar documentación</span>
+              <div>
+                <button class="btn btn-success btn-sm me-2 complete-btn">
+                  <i class="bi bi-check"></i> Completar
+                </button>
+                <button class="btn btn-danger btn-sm delete-btn">
+                  <i class="bi bi-trash"></i> Eliminar
+                </button>
+              </div>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              <span>Practicar CSS Grid</span>
+              <div>
+                <button class="btn btn-success btn-sm me-2 complete-btn">
+                  <i class="bi bi-check"></i> Completar
+                </button>
+                <button class="btn btn-danger btn-sm delete-btn">
+                  <i class="bi bi-trash"></i> Eliminar
+                </button>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Confirmación -->
+  <div class="modal fade" id="deleteModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-danger text-white">
+          <h5 class="modal-title"><i class="bi bi-exclamation-triangle me-2"></i>Confirmar eliminación</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <p>¿Estás seguro de que deseas eliminar esta tarea?</p>
+          <p class="text-muted mb-0">Esta acción no se puede deshacer.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-danger" id="confirmDelete">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal para Agregar Tarea -->
+  <div class="modal fade" id="addTaskModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Nueva Tarea</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="addTaskForm">
+            <div class="mb-3">
+              <label for="taskName" class="form-label">Nombre de la tarea</label>
+              <input type="text" class="form-control" id="taskName" required>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" form="addTaskForm" class="btn btn-primary">Agregar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    let taskToDelete = null;
+    const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+    const addTaskModal = new bootstrap.Modal(document.getElementById('addTaskModal'));
+
+    // Función para mostrar toast
+    function showToast(message, type) {
+      const colors = {
+        success: 'bg-success text-white',
+        danger: 'bg-danger text-white'
+      };
+
+      const toastHTML = `
+        <div class="toast align-items-center ${colors[type]} border-0" role="alert">
+          <div class="d-flex">
+            <div class="toast-body">${message}</div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+          </div>
+        </div>
+      `;
+
+      const container = document.getElementById('toastContainer');
+      container.insertAdjacentHTML('beforeend', toastHTML);
+      
+      const toastElement = container.lastElementChild;
+      const toast = new bootstrap.Toast(toastElement, { delay: 3000 });
+      toast.show();
+      
+      toastElement.addEventListener('hidden.bs.toast', () => toastElement.remove());
+    }
+
+    // Completar tarea
+    document.getElementById('taskList').addEventListener('click', function(e) {
+      if (e.target.classList.contains('complete-btn') || e.target.closest('.complete-btn')) {
+        const btn = e.target.closest('.complete-btn');
+        const listItem = btn.closest('li');
+        const taskName = listItem.querySelector('span');
+        
+        if (!taskName.style.textDecoration || taskName.style.textDecoration === 'none') {
+          taskName.style.textDecoration = 'line-through';
+          taskName.style.opacity = '0.6';
+          btn.disabled = true;
+          showToast('¡Tarea completada!', 'success');
+        }
+      }
+    });
+
+    // Abrir modal de eliminación
+    document.getElementById('taskList').addEventListener('click', function(e) {
+      if (e.target.classList.contains('delete-btn') || e.target.closest('.delete-btn')) {
+        const btn = e.target.closest('.delete-btn');
+        taskToDelete = btn.closest('li');
+        deleteModal.show();
+      }
+    });
+
+    // Confirmar eliminación
+    document.getElementById('confirmDelete').addEventListener('click', function() {
+      if (taskToDelete) {
+        const taskName = taskToDelete.querySelector('span').textContent;
+        taskToDelete.remove();
+        showToast(`Tarea "${taskName}" eliminada`, 'danger');
+        deleteModal.hide();
+        taskToDelete = null;
+      }
+    });
+
+    // Agregar nueva tarea
+    document.getElementById('addTaskForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const taskName = document.getElementById('taskName').value;
+      
+      const newTask = `
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <span>${taskName}</span>
+          <div>
+            <button class="btn btn-success btn-sm me-2 complete-btn">
+              <i class="bi bi-check"></i> Completar
+            </button>
+            <button class="btn btn-danger btn-sm delete-btn">
+              <i class="bi bi-trash"></i> Eliminar
+            </button>
+          </div>
+        </li>
+      `;
+      
+      document.getElementById('taskList').insertAdjacentHTML('beforeend', newTask);
+      showToast('Nueva tarea agregada', 'success');
+      document.getElementById('taskName').value = '';
+      addTaskModal.hide();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ejercicio 10 - EventHub App</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+  <style>
+    body { padding-top: 56px; }
+    .hero {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 60px 0;
+    }
+    .event-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+    .event-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+    }
+    .event-img {
+      height: 200px;
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 4rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Toast Container -->
+  <div class="toast-container position-fixed top-0 end-0 p-3" id="toastContainer"></div>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <i class="bi bi-calendar-event me-2"></i>EventHub
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item"><a class="nav-link active" href="#">Eventos</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Crear Evento</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Mis Reservas</a></li>
+        </ul>
+        <div class="d-flex align-items-center">
+          <button class="btn btn-outline-light me-3 position-relative" 
+                  data-bs-toggle="offcanvas" data-bs-target="#notificationsOffcanvas">
+            <i class="bi bi-bell"></i>
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">5</span>
+          </button>
+          <div class="dropdown">
+            <a class="nav-link dropdown-toggle text-white" href="#" data-bs-toggle="dropdown">
+              <i class="bi bi-person-circle fs-5"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="#"><i class="bi bi-person me-2"></i>Mi Perfil</a></li>
+              <li><a class="dropdown-item" href="#"><i class="bi bi-gear me-2"></i>Configuración</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#"><i class="bi bi-box-arrow-right me-2"></i>Cerrar Sesión</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container text-center">
+      <h1 class="display-4 fw-bold mb-3">Descubre Eventos Increíbles</h1>
+      <p class="lead mb-4">Encuentra y reserva los mejores eventos cerca de ti</p>
+      <div class="row justify-content-center">
+        <div class="col-lg-6">
+          <div class="input-group input-group-lg">
+            <input type="text" class="form-control" placeholder="Buscar eventos...">
+            <button class="btn btn-light" type="button">
+              <i class="bi bi-search"></i> Buscar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Category Tabs -->
+  <div class="container mt-5">
+    <ul class="nav nav-pills justify-content-center mb-4" id="categoryTabs">
+      <li class="nav-item">
+        <button class="nav-link active" data-bs-toggle="pill" data-category="all">Todos</button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link" data-bs-toggle="pill" data-category="music">Música</button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link" data-bs-toggle="pill" data-category="sports">Deportes</button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link" data-bs-toggle="pill" data-category="conference">Conferencias</button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link" data-bs-toggle="pill" data-category="social">Social</button>
+      </li>
+    </ul>
+
+    <!-- Events Grid -->
+    <div class="row g-4" id="eventsGrid">
+      <!-- Event 1 -->
+      <div class="col-md-6 col-lg-4 event-item" data-category="music">
+        <div class="card event-card h-100" data-event="1">
+          <div class="event-img"><i class="bi bi-music-note-beamed"></i></div>
+          <div class="card-body">
+            <span class="badge bg-primary mb-2">Música</span>
+            <h5 class="card-title">Concierto de Rock</h5>
+            <p class="card-text text-muted">
+              <i class="bi bi-calendar3 me-1"></i> 15 Ene 2024<br>
+              <i class="bi bi-geo-alt me-1"></i> Madrid Arena
+            </p>
+            <button class="btn btn-primary btn-sm w-100">Ver Detalles</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Event 2 -->
+      <div class="col-md-6 col-lg-4 event-item" data-category="sports">
+        <div class="card event-card h-100" data-event="2">
+          <div class="event-img"><i class="bi bi-trophy"></i></div>
+          <div class="card-body">
+            <span class="badge bg-success mb-2">Deportes</span>
+            <h5 class="card-title">Maratón Ciudad</h5>
+            <p class="card-text text-muted">
+              <i class="bi bi-calendar3 me-1"></i> 20 Ene 2024<br>
+              <i class="bi bi-geo-alt me-1"></i> Centro Ciudad
+            </p>
+            <button class="btn btn-primary btn-sm w-100">Ver Detalles</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Event 3 -->
+      <div class="col-md-6 col-lg-4 event-item" data-category="conference">
+        <div class="card event-card h-100" data-event="3">
+          <div class="event-img"><i class="bi bi-laptop"></i></div>
+          <div class="card-body">
+            <span class="badge bg-warning text-dark mb-2">Conferencia</span>
+            <h5 class="card-title">Tech Summit 2024</h5>
+            <p class="card-text text-muted">
+              <i class="bi bi-calendar3 me-1"></i> 25 Ene 2024<br>
+              <i class="bi bi-geo-alt me-1"></i> Centro Convenciones
+            </p>
+            <button class="btn btn-primary btn-sm w-100">Ver Detalles</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Event 4 -->
+      <div class="col-md-6 col-lg-4 event-item" data-category="music">
+        <div class="card event-card h-100" data-event="4">
+          <div class="event-img"><i class="bi bi-disc"></i></div>
+          <div class="card-body">
+            <span class="badge bg-primary mb-2">Música</span>
+            <h5 class="card-title">Festival de Jazz</h5>
+            <p class="card-text text-muted">
+              <i class="bi bi-calendar3 me-1"></i> 1 Feb 2024<br>
+              <i class="bi bi-geo-alt me-1"></i> Parque Central
+            </p>
+            <button class="btn btn-primary btn-sm w-100">Ver Detalles</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Event 5 -->
+      <div class="col-md-6 col-lg-4 event-item" data-category="social">
+        <div class="card event-card h-100" data-event="5">
+          <div class="event-img"><i class="bi bi-people"></i></div>
+          <div class="card-body">
+            <span class="badge bg-info text-dark mb-2">Social</span>
+            <h5 class="card-title">Networking Night</h5>
+            <p class="card-text text-muted">
+              <i class="bi bi-calendar3 me-1"></i> 5 Feb 2024<br>
+              <i class="bi bi-geo-alt me-1"></i> Hotel Plaza
+            </p>
+            <button class="btn btn-primary btn-sm w-100">Ver Detalles</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Event 6 -->
+      <div class="col-md-6 col-lg-4 event-item" data-category="sports">
+        <div class="card event-card h-100" data-event="6">
+          <div class="event-img"><i class="bi bi-bicycle"></i></div>
+          <div class="card-body">
+            <span class="badge bg-success mb-2">Deportes</span>
+            <h5 class="card-title">Ciclo Tour</h5>
+            <p class="card-text text-muted">
+              <i class="bi bi-calendar3 me-1"></i> 10 Feb 2024<br>
+              <i class="bi bi-geo-alt me-1"></i> Ruta Montaña
+            </p>
+            <button class="btn btn-primary btn-sm w-100">Ver Detalles</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Events 7-9 -->
+      <div class="col-md-6 col-lg-4 event-item" data-category="conference">
+        <div class="card event-card h-100" data-event="7">
+          <div class="event-img"><i class="bi bi-megaphone"></i></div>
+          <div class="card-body">
+            <span class="badge bg-warning text-dark mb-2">Conferencia</span>
+            <h5 class="card-title">Marketing Digital</h5>
+            <p class="card-text text-muted">
+              <i class="bi bi-calendar3 me-1"></i> 15 Feb 2024<br>
+              <i class="bi bi-geo-alt me-1"></i> Auditorio Norte
+            </p>
+            <button class="btn btn-primary btn-sm w-100">Ver Detalles</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4 event-item" data-category="social">
+        <div class="card event-card h-100" data-event="8">
+          <div class="event-img"><i class="bi bi-cup"></i></div>
+          <div class="card-body">
+            <span class="badge bg-info text-dark mb-2">Social</span>
+            <h5 class="card-title">Cata de Vinos</h5>
+            <p class="card-text text-muted">
+              <i class="bi bi-calendar3 me-1"></i> 18 Feb 2024<br>
+              <i class="bi bi-geo-alt me-1"></i> Bodega Premium
+            </p>
+            <button class="btn btn-primary btn-sm w-100">Ver Detalles</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4 event-item" data-category="music">
+        <div class="card event-card h-100" data-event="9">
+          <div class="event-img"><i class="bi bi-vinyl"></i></div>
+          <div class="card-body">
+            <span class="badge bg-primary mb-2">Música</span>
+            <h5 class="card-title">Noche de DJ</h5>
+            <p class="card-text text-muted">
+              <i class="bi bi-calendar3 me-1"></i> 22 Feb 2024<br>
+              <i class="bi bi-geo-alt me-1"></i> Club Nocturno
+            </p>
+            <button class="btn btn-primary btn-sm w-100">Ver Detalles</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Event Details Modal -->
+  <div class="modal fade" id="eventModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Detalles del Evento</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <ul class="nav nav-tabs mb-3" role="tablist">
+            <li class="nav-item">
+              <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#description">Descripción</button>
+            </li>
+            <li class="nav-item">
+              <button class="nav-link" data-bs-toggle="tab" data-bs-target="#location">Ubicación</button>
+            </li>
+            <li class="nav-item">
+              <button class="nav-link" data-bs-toggle="tab" data-bs-target="#comments">Comentarios</button>
+            </li>
+          </ul>
+          <div class="tab-content">
+            <div class="tab-pane fade show active" id="description">
+              <h4>Concierto de Rock</h4>
+              <p class="text-muted"><i class="bi bi-calendar3 me-2"></i>15 de Enero, 2024 - 20:00h</p>
+              <p>Disfruta de una noche inolvidable con los mejores grupos de rock del momento. 
+              Ambiente espectacular, sonido profesional y una experiencia única.</p>
+              <h6 class="mt-4">Incluye:</h6>
+              <ul>
+                <li>Entrada al recinto</li>
+                <li>Zona de merchandising</li>
+                <li>Parking gratuito</li>
+              </ul>
+            </div>
+            <div class="tab-pane fade" id="location">
+              <h5>Madrid Arena</h5>
+              <p><i class="bi bi-geo-alt me-2"></i>Av. de Felipe II, s/n, 28009 Madrid</p>
+              <div class="bg-light p-5 text-center">
+                <i class="bi bi-map display-1 text-muted"></i>
+                <p class="text-muted mt-2">Mapa del evento</p>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="comments">
+              <h6>Comentarios (3)</h6>
+              <div class="border-bottom pb-2 mb-2">
+                <strong>Juan P.</strong> <small class="text-muted">Hace 2 días</small>
+                <p class="mb-0">¡Increíble experiencia! Lo recomiendo.</p>
+              </div>
+              <div class="border-bottom pb-2 mb-2">
+                <strong>María G.</strong> <small class="text-muted">Hace 1 semana</small>
+                <p class="mb-0">Muy buen ambiente y organización.</p>
+              </div>
+              <div class="pb-2">
+                <strong>Carlos M.</strong> <small class="text-muted">Hace 2 semanas</small>
+                <p class="mb-0">Repetiré seguro, excelente.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary" id="bookEventBtn">
+            <i class="bi bi-check-circle me-2"></i>Reservar - €45
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notifications Offcanvas -->
+  <div class="offcanvas offcanvas-end" id="notificationsOffcanvas">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title"><i class="bi bi-bell me-2"></i>Notificaciones</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="offcanvas-body p-0">
+      <div class="list-group list-group-flush">
+        <a href="#" class="list-group-item list-group-item-action">
+          <div class="d-flex">
+            <div class="me-3">
+              <span class="badge bg-primary rounded-circle p-2"><i class="bi bi-ticket"></i></span>
+            </div>
+            <div class="flex-grow-1">
+              <strong>Nueva reserva confirmada</strong>
+              <p class="mb-0 small text-muted">Tu reserva para "Concierto de Rock" está confirmada</p>
+              <small class="text-muted">Hace 5 min</small>
+            </div>
+          </div>
+        </a>
+        <a href="#" class="list-group-item list-group-item-action">
+          <div class="d-flex">
+            <div class="me-3">
+              <span class="badge bg-success rounded-circle p-2"><i class="bi bi-star"></i></span>
+            </div>
+            <div class="flex-grow-1">
+              <strong>Evento recomendado</strong>
+              <p class="mb-0 small text-muted">Basado en tus preferencias: "Festival de Jazz"</p>
+              <small class="text-muted">Hace 1 hora</small>
+            </div>
+          </div>
+        </a>
+        <a href="#" class="list-group-item list-group-item-action">
+          <div class="d-flex">
+            <div class="me-3">
+              <span class="badge bg-warning rounded-circle p-2"><i class="bi bi-clock"></i></span>
+            </div>
+            <div class="flex-grow-1">
+              <strong>Recordatorio</strong>
+              <p class="mb-0 small text-muted">Tu evento es mañana a las 20:00h</p>
+              <small class="text-muted">Hace 2 horas</small>
+            </div>
+          </div>
+        </a>
+        <a href="#" class="list-group-item list-group-item-action">
+          <div class="d-flex">
+            <div class="me-3">
+              <span class="badge bg-info rounded-circle p-2"><i class="bi bi-gift"></i></span>
+            </div>
+            <div class="flex-grow-1">
+              <strong>Oferta especial</strong>
+              <p class="mb-0 small text-muted">20% descuento en eventos de música</p>
+              <small class="text-muted">Hace 1 día</small>
+            </div>
+          </div>
+        </a>
+        <a href="#" class="list-group-item list-group-item-action">
+          <div class="d-flex">
+            <div class="me-3">
+              <span class="badge bg-secondary rounded-circle p-2"><i class="bi bi-chat"></i></span>
+            </div>
+            <div class="flex-grow-1">
+              <strong>Nuevo comentario</strong>
+              <p class="mb-0 small text-muted">Alguien comentó en "Tech Summit 2024"</p>
+              <small class="text-muted">Hace 2 días</small>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="p-3">
+        <button class="btn btn-outline-primary w-100">Marcar todas como leídas</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white mt-5 py-4">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <h5>EventHub</h5>
+          <p class="text-muted">Descubre y reserva los mejores eventos</p>
+        </div>
+        <div class="col-md-4 mb-3">
+          <h6>Enlaces</h6>
+          <ul class="list-unstyled">
+            <li><a href="#" class="text-muted text-decoration-none">Sobre Nosotros</a></li>
+            <li><a href="#" class="text-muted text-decoration-none">Términos</a></li>
+            <li><a href="#" class="text-muted text-decoration-none">Privacidad</a></li>
+            <li><a href="#" class="text-muted text-decoration-none">Soporte</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4 mb-3">
+          <h6>Síguenos</h6>
+          <a href="#" class="text-white me-3"><i class="bi bi-facebook fs-4"></i></a>
+          <a href="#" class="text-white me-3"><i class="bi bi-twitter fs-4"></i></a>
+          <a href="#" class="text-white me-3"><i class="bi bi-instagram fs-4"></i></a>
+        </div>
+      </div>
+      <hr class="text-muted">
+      <p class="text-center text-muted mb-0">&copy; 2024 EventHub. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const eventModal = new bootstrap.Modal(document.getElementById('eventModal'));
+
+    // Filter events by category
+    document.querySelectorAll('#categoryTabs button').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const category = this.getAttribute('data-category');
+        document.querySelectorAll('.event-item').forEach(item => {
+          if (category === 'all' || item.getAttribute('data-category') === category) {
+            item.style.display = 'block';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Open event modal
+    document.querySelectorAll('.event-card').forEach(card => {
+      card.addEventListener('click', function() {
+        eventModal.show();
+      });
+    });
+
+    // Book event - show toast
+    document.getElementById('bookEventBtn').addEventListener('click', function() {
+      const toastHTML = `
+        <div class="toast align-items-center text-white bg-success border-0" role="alert">
+          <div class="d-flex">
+            <div class="toast-body">
+              <i class="bi bi-check-circle me-2"></i>¡Reserva confirmada! Recibirás un email de confirmación.
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+          </div>
+        </div>
+      `;
+      
+      const container = document.getElementById('toastContainer');
+      container.insertAdjacentHTML('beforeend', toastHTML);
+      const toastElement = container.lastElementChild;
+      const toast = new bootstrap.Toast(toastElement, { delay: 4000 });
+      toast.show();
+      
+      toastElement.addEventListener('hidden.bs.toast', () => toastElement.remove());
+      eventModal.hide();
+    });
+  </script>
+</body>
+</html>
